@@ -180,10 +180,15 @@ public class MirrorSourceConnector extends SourceConnector {
                     topicPartitions.size(), sourceAndTarget.source(), newTopicPartitions.size(), 
                     deadTopicPartitions.size(), knownTopicPartitions.size());
             knownTopicPartitions = topicPartitions;
-            context.requestTaskReconfiguration();
+            reconfigure();
         } else {
             knownTargetTopics = findExistingTargetTopics();
         }
+    }
+
+    private void reconfigure() {
+        scheduler.execute(this::createTopicPartitions, "creating downstream topic-partitions");
+        context.requestTaskReconfiguration();
     }
 
     private void loadTopicPartitions()

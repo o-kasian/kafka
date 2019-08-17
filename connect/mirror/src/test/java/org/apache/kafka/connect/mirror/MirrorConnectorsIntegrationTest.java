@@ -77,8 +77,8 @@ public class MirrorConnectorsIntegrationTest {
         mm2Props.put("sync.topic.acls.enabled", "false");
         mm2Props.put("emit.checkpoints.interval.seconds", "1");
         mm2Props.put("emit.heartbeats.interval.seconds", "1");
-        mm2Props.put("topics.refresh.interval.seconds", "1");
-        mm2Props.put("groups.refresh.interval.seconds", "1");
+        mm2Props.put("refresh.topics.interval.seconds", "1");
+        mm2Props.put("refresh.groups.interval.seconds", "1");
         
         mm2Config = new MirrorMakerConfig(mm2Props); 
         Map<String, String> primaryWorkerProps = mm2Config.workerConfig(new SourceAndTarget("backup", "primary"));
